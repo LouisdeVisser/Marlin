@@ -1,6 +1,6 @@
-/****************************
- * change_filament_screen.h *
- ****************************/
+/******************
+ * shaping_screen.h *
+ ******************/
 
 /****************************************************************************
  *   Written By Mark Pelletier  2017 - Aleph Objects, Inc.                  *
@@ -22,31 +22,11 @@
 
 #pragma once
 
-#define FTDI_CHANGE_FILAMENT_SCREEN
-#define FTDI_CHANGE_FILAMENT_SCREEN_CLASS ChangeFilamentScreen
+#define FTDI_SHAPING_SCREEN
+#define FTDI_SHAPING_SCREEN_CLASS ShapingScreen
 
-struct ChangeFilamentScreenData {
-  uint8_t e_tag, t_tag, repeat_tag;
-  ExtUI::extruder_t saved_extruder;
-  #if FILAMENT_UNLOAD_PURGE_LENGTH > 0
-    bool need_purge;
-  #endif
-};
-
-class ChangeFilamentScreen : public BaseScreen, public CachedScreen<CHANGE_FILAMENT_SCREEN_CACHE> {
-  private:
-    static uint8_t getSoftenTemp();
-    static ExtUI::extruder_t getExtruder();
-    static void drawTempGradient(uint16_t x, uint16_t y, uint16_t w, uint16_t h);
-    static void doPurge();
+class ShapingScreen : public BaseNumericAdjustmentScreen, public CachedScreen<SHAPING_SCREEN_CACHE> {
   public:
-    static void loadBitmaps();
-    static uint32_t getWarmColor(uint16_t temp, uint16_t cool, uint16_t low, uint16_t med, uint16_t high);
-    static void onEntry();
-    static void onExit();
     static void onRedraw(draw_mode_t);
-    static bool onTouchStart(uint8_t tag);
-    static bool onTouchEnd(uint8_t tag);
     static bool onTouchHeld(uint8_t tag);
-    static void onIdle();
 };

@@ -228,7 +228,11 @@
     constexpr bool Use_Crystal            = false; // 0 = use internal oscillator, 1 = module has a crystal populated
     constexpr bool GPIO_0_Audio_Enable    = false;
     constexpr bool GPIO_1_Audio_Shutdown  = false;
-    #define PATCH_GT911 // this display uses an alternative touch-controller and we need to tell the init function to patch the FT813 for it
+
+		#ifndef LCD_EVE2_POWERTIP
+    	#define PATCH_GT911 // this display uses an alternative touch-controller and we need to tell the init function to patch the FT813 for it
+		#endif
+
     constexpr uint8_t Pclkpol             = 1;
     constexpr uint8_t Swizzle             = 0;
     constexpr uint8_t CSpread             = 1;

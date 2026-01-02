@@ -97,6 +97,10 @@
   #include "../../feature/caselight.h"
 #endif
 
+#if ANY(CASE_LIGHT_USE_NEOPIXEL, CASE_LIGHT_USE_RGB_LED)
+	#include "../../feature/leds/leds.h"
+#endif
+
 #if ENABLED(POWER_LOSS_RECOVERY)
   #include "../../feature/powerloss.h"
 #endif
@@ -111,6 +115,10 @@
 
 #if ENABLED(ADVANCED_PAUSE_FEATURE)
   #include "../../feature/pause.h"
+#endif
+
+#if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
+	#include "../../module/stepper.h"
 #endif
 
 namespace ExtUI {
@@ -636,6 +644,12 @@ namespace ExtUI {
     #endif
   #endif
 
+	#if ANY(CASE_LIGHT_USE_NEOPIXEL, CASE_LIGHT_USE_RGB_LED)
+		void setCaseLightColor(const uint8_t r, const uint8_t g, const uint8_t b OPTARG(HAS_WHITE_LED, const uint8_t w=0)) {
+			leds.set_color(r, g, b OPTARG(HAS_WHITE_LED, w));
+		}
+	#endif
+
   #if ENABLED(POWER_LOSS_RECOVERY)
     bool getPowerLossRecoveryEnabled()                 { return recovery.enabled; }
     void setPowerLossRecoveryEnabled(const bool value) { recovery.enable(value); }
@@ -652,7 +666,18 @@ namespace ExtUI {
     }
   #endif
 
-  #if HAS_SHAPING
+	void setPresetEndTemp1(celsius_t set_temp){ui.material_preset[0].hotend_temp = set_temp;}
+	void setPresetEndTemp2(celsius_t set_temp){ui.material_preset[1].hotend_temp = set_temp;}
+	void setPresetBedTemp1(celsius_t set_temp){ui.material_preset[0].bed_temp = set_temp;}
+	void setPresetBedTemp2(celsius_t set_temp){ui.material_preset[1].bed_temp = set_temp;}
+	celsius_t getPresetEndTemp1(){return ui.material_preset[0].hotend_temp;}
+	celsius_t getPresetEndTemp2(){return ui.material_preset[1].hotend_temp;}
+	celsius_t getPresetBedTemp1(){return ui.material_preset[0].bed_temp;}
+	celsius_t getPresetBedTemp2(){return ui.material_preset[1].bed_temp;}
+
+
+
+  #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
     float getShapingZeta(const axis_t axis) {
       return stepper.get_shaping_damping_ratio((AxisEnum)axis);
     }
@@ -668,6 +693,34 @@ namespace ExtUI {
       if (freq == 0.0f || freq > min_freq)
         stepper.set_shaping_frequency((AxisEnum)axis, freq);
     }
+		bool getShapingState(){
+			const float freq = getShapingFrequency(X);
+			bool state = (freq != 0) ? true : false;
+			return state;
+		}
+		void setShapingState(const bool state){
+			if (state){
+				#if ENABLED(INPUT_SHAPING_X)
+					stepper.set_shaping_frequency((AxisEnum)X, SHAPING_FREQ_X);
+				#endif
+				#if ENABLED(INPUT_SHAPING_Y)
+					stepper.set_shaping_frequency((AxisEnum)Y, SHAPING_FREQ_Y);
+				#endif
+				#if ENABLED(INPUT_SHAPING_Z)
+					stepper.set_shaping_frequency((AxisEnum)Z, SHAPING_FREQ_Z);
+				#endif
+			} else {
+				#if ENABLED(INPUT_SHAPING_X)
+					stepper.set_shaping_frequency((AxisEnum)X, 0);
+				#endif
+				#if ENABLED(INPUT_SHAPING_Y)
+					stepper.set_shaping_frequency((AxisEnum)Y, 0);
+				#endif
+				#if ENABLED(INPUT_SHAPING_Z)
+					stepper.set_shaping_frequency((AxisEnum)Z, 0);
+				#endif
+			}
+		}
   #endif
 
   #if HAS_JUNCTION_DEVIATION

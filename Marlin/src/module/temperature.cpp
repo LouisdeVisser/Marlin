@@ -1218,7 +1218,7 @@ void Temperature::factory_reset() {
           total_energy_fan0 += mpc.heater_power * hotend.soft_pwm_amount / 127 * MPC_dT + (last_temp - current_temp) * mpc.block_heat_capacity;
         #if HAS_FAN
           else if (ELAPSED(curr_time_ms, test_end_ms) && !fan0_done) {
-            set_fan_speed(TERN(SINGLEFAN, 0, e), 255);
+            set_fan_speed(TERN(SINGLEFAN, 0, e), MAX_COOLING_FAN0_SPEED);
             planner.sync_fan_speeds(fan_speed);
             settle_end_ms = curr_time_ms + settle_time;
             test_end_ms = settle_end_ms + test_duration;
@@ -1294,7 +1294,7 @@ void Temperature::factory_reset() {
     disable_all_heaters();
     #if HAS_FAN
       zero_fan_speeds();
-      set_fan_speed(TERN(SINGLEFAN, 0, e), 255);
+      set_fan_speed(TERN(SINGLEFAN, 0, e), MAX_COOLING_FAN0_SPEED);
       planner.sync_fan_speeds(fan_speed);
     #endif
     do_blocking_move_to(xyz_pos_t(MPC_TUNING_POS));

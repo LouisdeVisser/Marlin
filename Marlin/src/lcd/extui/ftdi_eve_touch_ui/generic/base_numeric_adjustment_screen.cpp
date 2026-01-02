@@ -169,20 +169,23 @@ void BaseNumericAdjustmentScreen::widgets_t::_draw_increment_btn(CommandProcesso
     case 242: label = PSTR(  "0.1"  ); pos = _decimals - 1; break;
     case 243: label = PSTR(  "1"    ); pos = _decimals + 0; break;
     case 244: label = PSTR( "10"    ); pos = _decimals + 1; break;
-    default:  label = PSTR("100"    ); pos = _decimals + 2; break;
+		case 245:	label = PSTR(	"50"		); pos = _decimals + 2; break;
+    default:  label = PSTR("100"    ); pos = _decimals + 3; break;
   }
 
   const bool highlight = (_what & FOREGROUND) && (increment == tag);
 
   switch (pos) {
     #if ENABLED(TOUCH_UI_PORTRAIT)
-      case 0: _button(cmd, tag, BTN_POS(5,_line), BTN_SIZE(2,1), FPSTR(label), true, highlight); break;
-      case 1: _button(cmd, tag, BTN_POS(7,_line), BTN_SIZE(2,1), FPSTR(label), true, highlight); break;
-      case 2: _button(cmd, tag, BTN_POS(9,_line), BTN_SIZE(2,1), FPSTR(label), true, highlight); break;
+      case 0: _button(cmd, tag, BTN_POS(5,_line), 	BTN_SIZE(2,1), FPSTR(label), true, highlight); break;
+      case 1: _button(cmd, tag, BTN_POS(7,_line), 	BTN_SIZE(2,1), FPSTR(label), true, highlight); break;
+      case 2: _button(cmd, tag, BTN_POS(9,_line), 	BTN_SIZE(2,1), FPSTR(label), true, highlight); break;
+			case 3: _button(cmd, tag, BTN_POS(11,_line),  BTN_SIZE(2,1), FPSTR(label), true, highlight); break;
     #else
       case 0: _button(cmd, tag, BTN_POS(15,2),    BTN_SIZE(4,1), FPSTR(label), true, highlight); break;
       case 1: _button(cmd, tag, BTN_POS(15,3),    BTN_SIZE(4,1), FPSTR(label), true, highlight); break;
       case 2: _button(cmd, tag, BTN_POS(15,4),    BTN_SIZE(4,1), FPSTR(label), true, highlight); break;
+			case 3:	_button(cmd, tag, BTN_POS(15,5),    BTN_SIZE(4,1), FPSTR(label), true, highlight); break;
     #endif
   }
 }
@@ -203,10 +206,11 @@ void BaseNumericAdjustmentScreen::widgets_t::increments() {
       GET_TEXT_F(MSG_INCREMENT)
     );
   }
-
+	
+  _draw_increment_btn(cmd, _line+1, 246 - _decimals);
   _draw_increment_btn(cmd, _line+1, 245 - _decimals);
   _draw_increment_btn(cmd, _line+1, 244 - _decimals);
-  _draw_increment_btn(cmd, _line+1, 243 - _decimals);
+	_draw_increment_btn(cmd, _line+1, 243 - _decimals);
 
   #if ENABLED(TOUCH_UI_PORTRAIT)
     _line++;
@@ -370,7 +374,7 @@ void BaseNumericAdjustmentScreen::onEntry() {
 bool BaseNumericAdjustmentScreen::onTouchEnd(uint8_t tag) {
   switch (tag) {
     case 1:           GOTO_PREVIOUS(); return true;
-    case 240 ... 245: mydata.increment = tag; break;
+    case 240 ... 246: mydata.increment = tag; break;
     default:          return current_screen.onTouchHeld(tag);
   }
   return true;
@@ -383,7 +387,8 @@ float BaseNumericAdjustmentScreen::getIncrement() {
     case 242: return   0.1;
     case 243: return   1.0;
     case 244: return  10.0;
-    case 245: return 100.0;
+    case 245: return  50.0;
+		case 246: return 100.0;
     default:  return   0.0;
   }
 }

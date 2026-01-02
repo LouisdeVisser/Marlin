@@ -94,7 +94,11 @@ enum {
   INTERFACE_SETTINGS_SCREEN_CACHE,
   INTERFACE_SOUNDS_SCREEN_CACHE,
   LOCK_SCREEN_CACHE,
-  DISPLAY_TIMINGS_SCREEN_CACHE
+  DISPLAY_TIMINGS_SCREEN_CACHE,
+	#if ENABLED(SHAPING_MENU)
+		SHAPING_SCREEN_CACHE,
+	#endif
+	TEMP_PRESET_SCREEN_CACHE
 };
 
 // To save MCU RAM, the status message is "baked" in to the status screen
@@ -145,6 +149,7 @@ enum {
 #include "display_tuning_screen.h"
 #include "media_player_screen.h"
 #include "flow_percent_screen.h"
+#include "temp_preset_screen.h"
 
 #if ENABLED(PRINTCOUNTER)
   #include "statistics_screen.h"
@@ -226,4 +231,8 @@ enum {
 
 #if NUM_LANGUAGES > 1
   #include "language_menu.h"
+#endif
+
+#if ENABLED(SHAPING_MENU)
+	#include "shaping_screen.h"
 #endif

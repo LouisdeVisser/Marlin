@@ -294,6 +294,14 @@ namespace ExtUI {
   void setTargetTemp_celsius(const float, const extruder_t);
   void setTargetFan_percent(const float, const fan_t);
   void coolDown();
+	void setPresetEndTemp1(celsius_t);
+	void setPresetEndTemp2(celsius_t);
+	void setPresetBedTemp1(celsius_t);
+	void setPresetBedTemp2(celsius_t);
+	celsius_t getPresetEndTemp1();
+	celsius_t getPresetEndTemp2();
+	celsius_t getPresetBedTemp1();
+	celsius_t getPresetBedTemp2();
 
   // Motion Control
   void setAxisPosition_mm(const float, const axis_t, const feedRate_t=0);
@@ -333,11 +341,13 @@ namespace ExtUI {
     void setLinearAdvance_mm_mm_s(const float, const extruder_t);
   #endif
 
-  #if HAS_SHAPING
+  #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
     float getShapingZeta(const axis_t);
     void setShapingZeta(const float, const axis_t);
     float getShapingFrequency(const axis_t);
     void setShapingFrequency(const float, const axis_t);
+		bool getShapingState();
+		void setShapingState(const bool);
   #endif
 
   // JD or Jerk Control
@@ -420,6 +430,10 @@ namespace ExtUI {
       void setCaseLightBrightness_percent(const float);
     #endif
   #endif
+
+	#if ANY(CASE_LIGHT_USE_NEOPIXEL, CASE_LIGHT_USE_RGB_LED)
+		void setCaseLightColor(const uint8_t, const uint8_t, const uint8_t);
+	#endif
 
   // Power-Loss Recovery
   #if ENABLED(POWER_LOSS_RECOVERY)

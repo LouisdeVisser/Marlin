@@ -37,6 +37,10 @@ void CaseLightScreen::onRedraw(draw_mode_t what) {
                 .adjuster(10, GET_TEXT_F(MSG_CASE_LIGHT_BRIGHTNESS), getCaseLightBrightness_percent());
   w.precision(0).increments();
   #endif
+	w.button( 3, GET_TEXT_F(MSG_CASE_LIGHT_COLOR_WHITE));
+	w.button( 4, GET_TEXT_F(MSG_CASE_LIGHT_COLOR_RED));
+	w.button( 5, GET_TEXT_F(MSG_CASE_LIGHT_COLOR_GREEN));
+	w.button( 6, GET_TEXT_F(MSG_CASE_LIGHT_COLOR_BLUE));
 }
 
 bool CaseLightScreen::onTouchHeld(uint8_t tag) {
@@ -46,6 +50,10 @@ bool CaseLightScreen::onTouchHeld(uint8_t tag) {
   #endif
   switch (tag) {
     case 2: setCaseLightState(!getCaseLightState()); break;
+		case 3: setCaseLightColor(255, 255, 255); break;
+		case 4: setCaseLightColor(255, 	 0,   0); break;
+		case 5: setCaseLightColor(  0, 255,   0); break;
+		case 6: setCaseLightColor(  0,   0, 255); break;
     #if DISABLED(CASE_LIGHT_NO_BRIGHTNESS)
       case  10: UI_DECREMENT(CaseLightBrightness_percent); break;
       case  11: UI_INCREMENT(CaseLightBrightness_percent); break;

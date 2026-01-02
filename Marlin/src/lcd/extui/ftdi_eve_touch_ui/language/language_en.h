@@ -154,6 +154,30 @@ namespace Language_en {
   LSTR MSG_MOVE_Z_TO_TOP            = u8"Raise Z to Top";
   LSTR MSG_MAX_SPEED_NO_UNITS       = u8"Max Speed";
 
+	LSTR MSG_TEMP_PRESET								= u8"Temperature presets";
+	LSTR MSG_T_PRESET1_END							= u8"Preheat PLA nozzle ";
+	LSTR MSG_T_PRESET1_BED							= u8"Preheat PLA bed ";
+	LSTR MSG_T_PRESET2_END							= u8"Preheat ABS nozzle ";
+	LSTR MSG_T_PRESET2_BED							= u8"Preheat ABS bed ";
+
+	#if ENABLED(SHAPING_MENU)
+		LSTR MSG_SHAPING_MENU						= u8"Input Shaping";
+		LSTR MSG_ENABLE_SHAPING					= u8"Enable shaping";
+		LSTR MSG_SHAPING_A_FREQ         = STR_A u8" frequency";
+		LSTR MSG_SHAPING_B_FREQ         = STR_B u8" frequency";
+		LSTR MSG_DAMPING_A_RATIO				= STR_A u8" Damping";
+		LSTR MSG_DAMPING_B_RATIO				= STR_B u8" Damping";
+		LSTR MSG_UNIT_FREQ							= u8"Hz";
+		LSTR MSG_UNIT_ZETA							= u8"f";
+	#endif
+
+	#if ENABLED(CASE_LIGHT_MENU)
+		LSTR MSG_CASE_LIGHT_MENU				= u8"Caselight";
+		LSTR MSG_CASE_LIGHT_COLOR_WHITE = u8"White";
+		LSTR MSG_CASE_LIGHT_COLOR_RED 	= u8"Red";
+		LSTR MSG_CASE_LIGHT_COLOR_BLUE 	= u8"Blue";
+		LSTR MSG_CASE_LIGHT_COLOR_GREEN = u8"Green";
+	#endif
   //LSTR MSG_FTDI_HEATER_TIMEOUT    = u8"Idle timeout, temperature decreased. Press Okay to reheat and again to resume.";
 
   #if ENABLED(TOUCH_UI_LULZBOT_BIO)
