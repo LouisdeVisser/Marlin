@@ -165,8 +165,8 @@ bool AdvancedSettingsMenu::onTouchEnd(uint8_t tag) {
     #endif
     case  9: GOTO_SCREEN(InterfaceSettingsScreen);  LockScreen::check_passcode(); break;
     case 10: GOTO_SCREEN(RestoreFailsafeDialogBox); LockScreen::check_passcode(); break;
-    #if ANY(LIN_ADVANCE, FILAMENT_RUNOUT_SENSOR)
-    case 11: GOTO_SCREEN(FilamentMenu); break;
+    #if ANY(LIN_ADVANCE, HAS_FILAMENT_SENSOR)
+      case 11: GOTO_SCREEN(FilamentMenu); break;
     #endif
     case 12: GOTO_SCREEN(EndstopStatesScreen); break;
     #if HAS_TRINAMIC_CONFIG
