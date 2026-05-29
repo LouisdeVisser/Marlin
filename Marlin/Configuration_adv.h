@@ -1156,14 +1156,14 @@
  * Enable/disable and set parameters with G-code M493 and M494.
  * See ft_types.h for named values used by FTM options.
  */
-//#define FT_MOTION
+#define FT_MOTION
 #if ENABLED(FT_MOTION)
-  //#define FTM_IS_DEFAULT_MOTION               // Use FT Motion as the factory default?
-  //#define FT_MOTION_MENU                      // Provide a MarlinUI menu to set M493 and M494 parameters
+  #define FTM_IS_DEFAULT_MOTION               // Use FT Motion as the factory default?
+  #define FT_MOTION_MENU                      // Provide a MarlinUI menu to set M493 and M494 parameters
 
   //#define NO_STANDARD_MOTION                  // Disable the standard motion system entirely to save Flash and RAM
   #if DISABLED(NO_STANDARD_MOTION)
-    //#define FTM_HOME_AND_PROBE                // Use FT Motion for homing / probing. Disable if FT Motion breaks these functions.
+    #define FTM_HOME_AND_PROBE                // Use FT Motion for homing / probing. Disable if FT Motion breaks these functions.
   #endif
 
   //#define FTM_DYNAMIC_FREQ                    // Enable for linear adjustment of XY shaping frequency according to Z or E
@@ -1181,46 +1181,46 @@
   #define FTM_SHAPER_3HEI
   #define FTM_SHAPER_MZV
 
-  #define FTM_DEFAULT_SHAPER_X      ftMotionShaper_NONE // Default shaper mode on X axis (NONE, ZV, ZVD, ZVDD, ZVDDD, EI, 2HEI, 3HEI, MZV)
-  #define FTM_SHAPING_DEFAULT_FREQ_X   37.0f    // (Hz) Default peak frequency used by input shapers
-  #define FTM_SHAPING_ZETA_X            0.1f    // Zeta used by input shapers for X axis
+  #define FTM_DEFAULT_SHAPER_X      ftMotionShaper_ZVDD // Default shaper mode on X axis (NONE, ZV, ZVD, ZVDD, ZVDDD, EI, 2HEI, 3HEI, MZV)
+  #define FTM_SHAPING_DEFAULT_FREQ_X   173.0f    // (Hz) Default peak frequency used by input shapers
+  #define FTM_SHAPING_ZETA_X            0.22f    // Zeta used by input shapers for X axis
   #define FTM_SHAPING_V_TOL_X           0.05f   // Vibration tolerance used by EI input shapers for X axis
 
-  #define FTM_DEFAULT_SHAPER_Y      ftMotionShaper_NONE // Default shaper mode on Y axis
-  #define FTM_SHAPING_DEFAULT_FREQ_Y   37.0f    // (Hz) Default peak frequency used by input shapers
-  #define FTM_SHAPING_ZETA_Y            0.1f    // Zeta used by input shapers for Y axis
+  #define FTM_DEFAULT_SHAPER_Y      ftMotionShaper_ZVDD // Default shaper mode on Y axis
+  #define FTM_SHAPING_DEFAULT_FREQ_Y   173.0f    // (Hz) Default peak frequency used by input shapers
+  #define FTM_SHAPING_ZETA_Y            0.22f    // Zeta used by input shapers for Y axis
   #define FTM_SHAPING_V_TOL_Y           0.05f   // Vibration tolerance used by EI input shapers for Y axis
 
   //#define FTM_SHAPER_Z                        // Include Z shaping support
-  #define FTM_DEFAULT_SHAPER_Z      ftMotionShaper_NONE // Default shaper mode on Z axis
-  #define FTM_SHAPING_DEFAULT_FREQ_Z   21.0f    // (Hz) Default peak frequency used by input shapers
-  #define FTM_SHAPING_ZETA_Z            0.03f   // Zeta used by input shapers for Z axis
+  #define FTM_DEFAULT_SHAPER_Z      ftMotionShaper_ZVDD // Default shaper mode on Z axis
+  #define FTM_SHAPING_DEFAULT_FREQ_Z   173.0f    // (Hz) Default peak frequency used by input shapers
+  #define FTM_SHAPING_ZETA_Z            0.22f   // Zeta used by input shapers for Z axis
   #define FTM_SHAPING_V_TOL_Z           0.05f   // Vibration tolerance used by EI input shapers for Z axis
 
-  //#define FTM_SHAPER_E                        // Include E shaping support
+  #define FTM_SHAPER_E                        // Include E shaping support
                                                 // Required to synchronize extruder with XYZ (better quality)
-  #define FTM_DEFAULT_SHAPER_E      ftMotionShaper_NONE // Default shaper mode on Extruder axis
-  #define FTM_SHAPING_DEFAULT_FREQ_E   21.0f    // (Hz) Default peak frequency used by input shapers
-  #define FTM_SHAPING_ZETA_E            0.03f   // Zeta used by input shapers for E axis
+  #define FTM_DEFAULT_SHAPER_E      ftMotionShaper_ZVDD // Default shaper mode on Extruder axis
+  #define FTM_SHAPING_DEFAULT_FREQ_E   173.0f    // (Hz) Default peak frequency used by input shapers
+  #define FTM_SHAPING_ZETA_E            0.22f   // Zeta used by input shapers for E axis
   #define FTM_SHAPING_V_TOL_E           0.05f   // Vibration tolerance used by EI input shapers for E axis
 
-  //#define FTM_RESONANCE_TEST                  // Sine sweep motion for resonance study
+  #define FTM_RESONANCE_TEST                  // Sine sweep motion for resonance study
 
-  //#define FTM_SMOOTHING                       // Smoothing can reduce artifacts and make steppers quieter
+  #define FTM_SMOOTHING                       // Smoothing can reduce artifacts and make steppers quieter
                                                 // on sharp corners, but too much will round corners.
   #if ENABLED(FTM_SMOOTHING)
     #define FTM_MAX_SMOOTHING_TIME      0.10f   // (s) Maximum smoothing time. Higher values consume more RAM.
                                                 // Increase smoothing time to reduce jerky motion, ghosting and noises.
-    #define FTM_SMOOTHING_TIME_X        0.00f   // (s) Smoothing time for X axis. Zero means disabled.
-    #define FTM_SMOOTHING_TIME_Y        0.00f   // (s) Smoothing time for Y axis
-    #define FTM_SMOOTHING_TIME_Z        0.00f   // (s) Smoothing time for Z axis
+    #define FTM_SMOOTHING_TIME_X        0.02f   // (s) Smoothing time for X axis. Zero means disabled.
+    #define FTM_SMOOTHING_TIME_Y        0.02f   // (s) Smoothing time for Y axis
+    #define FTM_SMOOTHING_TIME_Z        0.02f   // (s) Smoothing time for Z axis
     #define FTM_SMOOTHING_TIME_E        0.02f   // (s) Smoothing time for E axis. Prevents noise/skipping from LA by
                                                 //     smoothing acceleration peaks, which may also smooth curved surfaces.
   #endif
 
   #define FTM_POLYS                             // Disable POLY5/6 to save ~3k of Flash. Preserves TRAPEZOIDAL.
   #if ENABLED(FTM_POLYS)
-    #define FTM_TRAJECTORY_TYPE TRAPEZOIDAL     // Block acceleration profile (TRAPEZOIDAL, POLY5, POLY6)
+    #define FTM_TRAJECTORY_TYPE POLY6     // Block acceleration profile (TRAPEZOIDAL, POLY5, POLY6)
                                                 // TRAPEZOIDAL: Continuous Velocity. Max acceleration is respected.
                                                 // POLY5:       Like POLY6 with 1.5x but uses less CPU.
                                                 // POLY6:       Continuous Acceleration (aka S_CURVE).
@@ -2794,7 +2794,7 @@
  * Currently handles M108, M112, M410, M876
  * NOTE: Not yet implemented for all platforms.
  */
-//#define EMERGENCY_PARSER
+#define EMERGENCY_PARSER
 
 /**
  * Realtime Reporting (requires EMERGENCY_PARSER)
@@ -3119,7 +3119,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(X)
-    #define X_CURRENT       800        // (mA) RMS current. Multiply by 1.414 for peak current.
+    #define X_CURRENT       1100        // (mA) RMS current. Multiply by 1.414 for peak current.
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for homing. (Typically lower than *_CURRENT.)
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.11
@@ -3139,7 +3139,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y)
-    #define Y_CURRENT       800
+    #define Y_CURRENT       1100
     #define Y_CURRENT_HOME  Y_CURRENT
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.11
@@ -3159,7 +3159,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z)
-    #define Z_CURRENT       800
+    #define Z_CURRENT       500
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.11
@@ -3259,7 +3259,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E0)
-    #define E0_CURRENT      800
+    #define E0_CURRENT      400
     #define E0_MICROSTEPS    16
     #define E0_RSENSE         0.11
     #define E0_CHAIN_POS     -1
@@ -3457,7 +3457,7 @@
    * Define your own with:
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
-  #define CHOPPER_TIMING CHOPPER_DEFAULT_12V        // All axes (override below)
+  #define CHOPPER_TIMING CHOPPER_DEFAULT_24V        // All axes (override below)
   //#define CHOPPER_TIMING_X  CHOPPER_TIMING        // For X Axes (override below)
   //#define CHOPPER_TIMING_X2 CHOPPER_TIMING_X
   //#define CHOPPER_TIMING_Y  CHOPPER_TIMING        // For Y Axes (override below)
@@ -3494,7 +3494,7 @@
    * M912 - Clear stepper driver overtemperature pre-warn condition flag.
    * M122 - Report driver parameters (Requires TMC_DEBUG)
    */
-  //#define MONITOR_DRIVER_STATUS
+  #define MONITOR_DRIVER_STATUS
 
   #if ENABLED(MONITOR_DRIVER_STATUS)
     #define CURRENT_STEP_DOWN     50  // [mA]
@@ -3513,28 +3513,28 @@
    */
   //#define HYBRID_THRESHOLD
 
-  #define X_HYBRID_THRESHOLD     100  // [mm/s]
-  #define X2_HYBRID_THRESHOLD    100
-  #define Y_HYBRID_THRESHOLD     100
-  #define Y2_HYBRID_THRESHOLD    100
-  #define Z_HYBRID_THRESHOLD       3
-  #define Z2_HYBRID_THRESHOLD      3
-  #define Z3_HYBRID_THRESHOLD      3
-  #define Z4_HYBRID_THRESHOLD      3
+  #define X_HYBRID_THRESHOLD     150  // [mm/s]
+  #define X2_HYBRID_THRESHOLD    X_HYBRID_THRESHOLD
+  #define Y_HYBRID_THRESHOLD     X_HYBRID_THRESHOLD
+  #define Y2_HYBRID_THRESHOLD    X_HYBRID_THRESHOLD
+  #define Z_HYBRID_THRESHOLD       8
+  #define Z2_HYBRID_THRESHOLD      Z_HYBRID_THRESHOLD
+  #define Z3_HYBRID_THRESHOLD      Z_HYBRID_THRESHOLD
+  #define Z4_HYBRID_THRESHOLD      Z_HYBRID_THRESHOLD
   #define I_HYBRID_THRESHOLD       3  // [linear=mm/s, rotational=°/s]
   #define J_HYBRID_THRESHOLD       3  // [linear=mm/s, rotational=°/s]
   #define K_HYBRID_THRESHOLD       3  // [linear=mm/s, rotational=°/s]
   #define U_HYBRID_THRESHOLD       3  // [mm/s]
   #define V_HYBRID_THRESHOLD       3
   #define W_HYBRID_THRESHOLD       3
-  #define E0_HYBRID_THRESHOLD     30
-  #define E1_HYBRID_THRESHOLD     30
-  #define E2_HYBRID_THRESHOLD     30
-  #define E3_HYBRID_THRESHOLD     30
-  #define E4_HYBRID_THRESHOLD     30
-  #define E5_HYBRID_THRESHOLD     30
-  #define E6_HYBRID_THRESHOLD     30
-  #define E7_HYBRID_THRESHOLD     30
+  #define E0_HYBRID_THRESHOLD      5
+  #define E1_HYBRID_THRESHOLD      5
+  #define E2_HYBRID_THRESHOLD     E0_HYBRID_THRESHOLD
+  #define E3_HYBRID_THRESHOLD     E0_HYBRID_THRESHOLD
+  #define E4_HYBRID_THRESHOLD     E0_HYBRID_THRESHOLD
+  #define E5_HYBRID_THRESHOLD     E0_HYBRID_THRESHOLD
+  #define E6_HYBRID_THRESHOLD     E0_HYBRID_THRESHOLD
+  #define E7_HYBRID_THRESHOLD     E0_HYBRID_THRESHOLD
 
   /**
    * Use StallGuard to home / probe X, Y, Z.
@@ -3608,7 +3608,7 @@
    * Enable M122 debugging command for TMC stepper drivers.
    * M122 S0/1 will enable continuous reporting.
    */
-  //#define TMC_DEBUG
+  #define TMC_DEBUG
 
   /**
    * You can set your own advanced settings by filling in predefined functions.
@@ -4140,7 +4140,7 @@
  *
  * Execute certain G-code commands immediately after power-on.
  */
-//#define STARTUP_COMMANDS "M17 Z"
+#define STARTUP_COMMANDS "M569 S1 X Y Z I1 I2 E"
 
 /**
  * G-code Macros

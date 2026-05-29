@@ -216,8 +216,7 @@ bool FilesScreen::onTouchEnd(uint8_t tag) {
       GOTO_PREVIOUS();
       return true;
     case 241: // Print highlighted file
-      printFile(getSelectedShortFilename());
-      GOTO_SCREEN(StatusScreen);
+      ConfirmStartPrintDialogBox::show(getSelectedFileIndex());
       return true;
     case 242: // Previous page
       if (mydata.cur_page > 0) {

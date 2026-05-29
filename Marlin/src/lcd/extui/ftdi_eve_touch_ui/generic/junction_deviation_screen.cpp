@@ -31,10 +31,10 @@ using namespace Theme;
 
 void JunctionDeviationScreen::onRedraw(draw_mode_t what) {
   widgets_t w(what);
-  w.precision(2);
+  w.precision(3);
   w.units(GET_TEXT_F(MSG_UNITS_MM));
   w.heading(GET_TEXT_F(MSG_JUNCTION_DEVIATION));
-  w.color(other) .adjuster( 2, F(""), getJunctionDeviation_mm() );
+  w.color(other) .adjuster( 3, F(""), getJunctionDeviation_mm() );
   w.increments();
 }
 

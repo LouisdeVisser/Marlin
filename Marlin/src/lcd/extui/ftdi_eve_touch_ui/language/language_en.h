@@ -57,6 +57,7 @@ namespace Language_en {
   LSTR MSG_AXIS_Y2                  = u8"Y2";
   LSTR MSG_AXIS_Z                   = u8"Z";
   LSTR MSG_AXIS_Z2                  = u8"Z2";
+	LSTR MSG_AXIS_Z3                  = u8"Z3";
   LSTR MSG_AXIS_E                   = u8"E";
   LSTR MSG_AXIS_E1                  = u8"E1";
   LSTR MSG_AXIS_E2                  = u8"E2";
@@ -92,7 +93,7 @@ namespace Language_en {
   LSTR MSG_UNITS_PERCENT            = u8"%";
   LSTR MSG_UNITS_C                  = DEGREE_SIGN u8"C";
   LSTR MSG_IDLE                     = u8"idle";
-  LSTR MSG_SET_MAXIMUM              = u8"Set Maximum";
+  LSTR MSG_SET_MAXIMUM              = u8"Go to max accel. screen";
   LSTR MSG_PRINT_SPEED              = u8"Print Speed";
   LSTR MSG_SPEED                    = u8"Speed";
   LSTR MSG_LINEAR_ADVANCE_K         = u8"K";
@@ -159,10 +160,12 @@ namespace Language_en {
 	LSTR MSG_T_PRESET1_BED							= u8"Preheat PLA bed ";
 	LSTR MSG_T_PRESET2_END							= u8"Preheat ABS nozzle ";
 	LSTR MSG_T_PRESET2_BED							= u8"Preheat ABS bed ";
+	LSTR MSG_MPC_START									= u8"Start MPC tune";
 
-	#if ENABLED(SHAPING_MENU)
+	#if ANY(SHAPING_MENU, FT_MOTION_MENU)
 		LSTR MSG_SHAPING_MENU						= u8"Input Shaping";
 		LSTR MSG_ENABLE_SHAPING					= u8"Enable shaping";
+		LSTR MSG_FT_STD_SHAPING					= u8"FT Motion / Standard motion";
 		LSTR MSG_SHAPING_A_FREQ         = STR_A u8" frequency";
 		LSTR MSG_SHAPING_B_FREQ         = STR_B u8" frequency";
 		LSTR MSG_DAMPING_A_RATIO				= STR_A u8" Damping";
@@ -170,6 +173,8 @@ namespace Language_en {
 		LSTR MSG_UNIT_FREQ							= u8"Hz";
 		LSTR MSG_UNIT_ZETA							= u8"f";
 	#endif
+
+
 
 	#if ENABLED(CASE_LIGHT_MENU)
 		LSTR MSG_CASE_LIGHT_MENU				= u8"Caselight";

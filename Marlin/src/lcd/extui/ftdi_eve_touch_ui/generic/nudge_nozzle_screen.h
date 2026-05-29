@@ -41,4 +41,5 @@ class NudgeNozzleScreen : public BaseNumericAdjustmentScreen, public CachedScree
     static bool onTouchEnd(uint8_t tag);
     static bool onTouchHeld(uint8_t tag);
     static void onIdle();
+		static char GetZOffset_ui();
 };

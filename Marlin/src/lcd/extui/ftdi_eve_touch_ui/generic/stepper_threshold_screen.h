@@ -1,9 +1,10 @@
-/***************************
- * flow_percent_screen.cpp *
- ***************************/
+/****************************
+ * stepper_current_screen.h *
+ ****************************/
 
 /****************************************************************************
- *   Written By Marcio Teixeira 2021 - Cocoa Press                          *
+ *   Written By Mark Pelletier  2017 - Aleph Objects, Inc.                  *
+ *   Written By Marcio Teixeira 2018 - Aleph Objects, Inc.                  *
  *                                                                          *
  *   This program is free software: you can redistribute it and/or modify   *
  *   it under the terms of the GNU General Public License as published by   *
@@ -19,32 +20,13 @@
  *   location: <https://www.gnu.org/licenses/>.                             *
  ****************************************************************************/
 
-#include "../config.h"
-#include "../screens.h"
+#pragma once
 
-#ifdef FTDI_FLOW_PERCENT_SCREEN
+#define FTDI_STEPPER_THRESHOLD_SCREEN
+#define FTDI_STEPPER_THRESHOLD_SCREEN_CLASS StepperThresholdScreen
 
-using namespace FTDI;
-using namespace ExtUI;
-
-void FlowPercentScreen::onRedraw(draw_mode_t what) {
-  widgets_t w(what);
-  w.precision(1).units(GET_TEXT_F(MSG_UNITS_PERCENT));
-
-  w.heading(GET_TEXT_F(MSG_FLOW_PERCENTAGE));
-  w.adjuster(4,  GET_TEXT_F(MSG_FLOW), getFlow_percent(E0));
-  w.increments();
-}
-
-bool FlowPercentScreen::onTouchHeld(uint8_t tag) {
-  const float increment = getIncrement();
-  switch (tag) {
-    case 4: UI_DECREMENT(Flow_percent, E0); break;
-    case 5: UI_INCREMENT(Flow_percent, E0); break;
-    default:
-      return false;
-  }
-  return true;
-}
-
-#endif // FTDI_FLOW_PERCENT_SCREEN
+class StepperThresholdScreen : public BaseNumericAdjustmentScreen, public CachedScreen<STEPPER_THRESHOLD_SCREEN_CACHE> {
+  public:
+    static void onRedraw(draw_mode_t);
+    static bool onTouchHeld(uint8_t tag);
+};

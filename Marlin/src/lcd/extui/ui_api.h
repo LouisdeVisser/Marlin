@@ -165,6 +165,13 @@ namespace ExtUI {
 
      int getTMCBumpSensitivity(const axis_t);
     void setTMCBumpSensitivity(const float, const axis_t);
+
+		#if ENABLED(HYBRID_THRESHOLD)
+			int getTMCThresholdCurrent(const axis_t);
+			void setTMCThresholdCurrent(const int, const axis_t);
+			int getTMCThresholdCurrent(const extruder_t);
+			void setTMCThresholdCurrent(const int, const extruder_t);		
+		#endif
   #endif
 
   // Actual and target accessors, by Heater ID, Extruder ID, Fan ID
@@ -341,14 +348,17 @@ namespace ExtUI {
     void setLinearAdvance_mm_mm_s(const float, const extruder_t);
   #endif
 
-  #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
+  #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z, FT_MOTION)
     float getShapingZeta(const axis_t);
     void setShapingZeta(const float, const axis_t);
     float getShapingFrequency(const axis_t);
     void setShapingFrequency(const float, const axis_t);
 		bool getShapingState();
 		void setShapingState(const bool);
+		bool getMotionType();
+		void setMotionType();
   #endif
+
 
   // JD or Jerk Control
   #if HAS_JUNCTION_DEVIATION

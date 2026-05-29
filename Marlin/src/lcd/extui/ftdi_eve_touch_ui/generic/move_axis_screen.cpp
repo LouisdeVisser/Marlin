@@ -49,7 +49,7 @@ void BaseMoveAxisScreen::onEntry() {
 void MoveAxisScreen::onRedraw(draw_mode_t what) {
   widgets_t w(what);
   CommandProcessor cmd;
-  w.precision(0);
+  w.precision(1);
   w.units(GET_TEXT_F(MSG_UNITS_MM));
   w.heading(                           GET_TEXT_F(MSG_MOVE_AXIS));
   w.home_buttons(20);

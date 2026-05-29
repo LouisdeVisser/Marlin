@@ -220,6 +220,15 @@ namespace ExtUI {
         case MPC_STARTED:
           StatusScreen::setStatusMessage(GET_TEXT_F(MSG_MPC_AUTOTUNE));
           break;
+				case MPC_TEMP_ERROR:
+          StatusScreen::setStatusMessage(GET_TEXT_F(MSG_MPC_TEMPERATURE_ERROR));
+          break;
+				case MPC_INTERRUPTED:
+					StatusScreen::setStatusMessage(GET_TEXT_F(MSG_MPC_AUTOTUNE_INTERRUPTED));
+					break;
+				case MPC_DONE:
+					StatusScreen::setStatusMessage(GET_TEXT_F(MSG_MPC_AUTOTUNE_FINISHED));
+					break;
       }
       GOTO_SCREEN(StatusScreen);
     }

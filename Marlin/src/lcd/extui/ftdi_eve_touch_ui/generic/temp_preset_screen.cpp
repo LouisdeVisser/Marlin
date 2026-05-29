@@ -29,15 +29,17 @@ using namespace FTDI;
 using namespace ExtUI;
 using namespace Theme;
 
+
 void TemperaturePresetScreen::onRedraw(draw_mode_t what) {
   widgets_t w(what);
   w.precision(0, DEFAULT_MIDRANGE);
   w.units(GET_TEXT_F(MSG_UNITS_C));
   w.heading(                        GET_TEXT_F(MSG_STEPS_PER_MM));
-  w.color(temp)    	.adjuster( 2, GET_TEXT_F(MSG_T_PRESET1_END),  getPresetEndTemp1() );
-  w.color(temp)     .adjuster( 4, GET_TEXT_F(MSG_T_PRESET1_BED),  getPresetBedTemp1() );
-  w.color(temp)     .adjuster( 6, GET_TEXT_F(MSG_T_PRESET2_END),  getPresetEndTemp2() );
-	w.color(temp)     .adjuster( 8, GET_TEXT_F(MSG_T_PRESET2_BED),  getPresetBedTemp2() );
+  w.color(temp)    	.adjuster( 2, 	GET_TEXT_F(MSG_T_PRESET1_END),  getPresetEndTemp1() );
+  w.color(temp)     .adjuster( 4, 	GET_TEXT_F(MSG_T_PRESET1_BED),  getPresetBedTemp1() );
+  w.color(temp)     .adjuster( 6, 	GET_TEXT_F(MSG_T_PRESET2_END),  getPresetEndTemp2() );
+	w.color(temp)     .adjuster( 8, 	GET_TEXT_F(MSG_T_PRESET2_BED),  getPresetBedTemp2() );
+	w.color(temp)			.button(	 10, 	GET_TEXT_F(MSG_MPC_START));
   w.increments();
 }
 
@@ -52,6 +54,7 @@ bool TemperaturePresetScreen::onTouchHeld(uint8_t tag) {
     case  7: UI_INCREMENT(PresetEndTemp2);  break;
     case  8: UI_DECREMENT(PresetBedTemp2);  break;
     case  9: UI_INCREMENT(PresetBedTemp2);  break;
+		case 	10: injectCommands(F("M306 T")); break;
     default:
       return false;
   }

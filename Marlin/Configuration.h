@@ -222,7 +222,7 @@ line 136
 */
 
 #define NO_AUTO_ASSIGN_WARNING
-
+#define DIAG_JUMPERS_REMOVED
 
 
 
@@ -318,12 +318,12 @@ line 136
  *          TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE  TMC2208_STANDALONE
-#define Y_DRIVER_TYPE  TMC2208_STANDALONE
-#define Z_DRIVER_TYPE  TMC2208_STANDALONE
-#define Z2_DRIVER_TYPE TMC2208_STANDALONE
-#define Z3_DRIVER_TYPE TMC2208_STANDALONE
-#define E0_DRIVER_TYPE TMC2208_STANDALONE
+#define X_DRIVER_TYPE  TMC2209
+#define Y_DRIVER_TYPE  TMC2209
+#define Z_DRIVER_TYPE  TMC2208
+#define Z2_DRIVER_TYPE TMC2208
+#define Z3_DRIVER_TYPE TMC2208
+#define E0_DRIVER_TYPE TMC2208 // this is a 2208 driver
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
@@ -928,12 +928,12 @@ line 136
   #define MPC_INCLUDE_FAN                             // Model the fan speed?
 
   // Measured physical constants from M306
-  #define MPC_BLOCK_HEAT_CAPACITY { 16.85f }           // (J/K) Heat block heat capacities.
-  #define MPC_SENSOR_RESPONSIVENESS { 0.1907f }         // (K/s per ∆K) Rate of change of sensor temperature from heat block.
-  #define MPC_AMBIENT_XFER_COEFF { 0.0833f }           // (W/K) Heat transfer coefficients from heat block to room air with fan off.
+  #define MPC_BLOCK_HEAT_CAPACITY { 24.13f }           // (J/K) Heat block heat capacities.
+  #define MPC_SENSOR_RESPONSIVENESS { 0.1489f }         // (K/s per ∆K) Rate of change of sensor temperature from heat block.
+  #define MPC_AMBIENT_XFER_COEFF { 0.1209f }           // (W/K) Heat transfer coefficients from heat block to room air with fan off.
   #if ENABLED(MPC_INCLUDE_FAN)
 		#define MAX_COOLING_FAN0_SPEED 127
-    #define MPC_AMBIENT_XFER_COEFF_FAN255 { 0.1332f }  // (W/K) Heat transfer coefficients from heat block to room air with fan on full.
+    #define MPC_AMBIENT_XFER_COEFF_FAN255 { 0.1705f }  // (W/K) Heat transfer coefficients from heat block to room air with fan on full.
   #endif
 
   // For one fan and multiple hotends MPC needs to know how to apply the fan cooling effect.
@@ -1586,7 +1586,7 @@ line 136
  *   https://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.02 // (mm) Distance from real junction edge
+  #define JUNCTION_DEVIATION_MM 0.01 // (mm) Distance from real junction edge
   #define JD_HANDLE_SMALL_SEGMENTS    // Use curvature estimation instead of just the junction angle
                                       // for small segments (< 1mm) with large junction angles (> 135°).
 #endif

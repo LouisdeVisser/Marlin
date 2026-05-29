@@ -49,8 +49,8 @@ template void DialogBoxBaseClass::drawMessage(PGM_P const, const int16_t);
 void DialogBoxBaseClass::drawYesNoButtons(uint8_t default_btn) {
   CommandProcessor cmd;
   cmd.font(font_medium)
-     .colors(default_btn == 1 ? action_btn : normal_btn).tag(1).button(BTN_POS(2,8), BTN_SIZE(1,1), GET_TEXT_F(MSG_YES))
-     .colors(default_btn == 2 ? action_btn : normal_btn).tag(2).button(BTN_POS(1,8), BTN_SIZE(1,1), GET_TEXT_F(MSG_NO));
+     .colors(default_btn == 1 ? action_btn : normal_btn).tag(1).button(BTN_POS(1,8), BTN_SIZE(1,1), GET_TEXT_F(MSG_YES))
+     .colors(default_btn == 2 ? action_btn : normal_btn).tag(2).button(BTN_POS(2,8), BTN_SIZE(1,1), GET_TEXT_F(MSG_NO));
 }
 
 void DialogBoxBaseClass::drawStartPrintButtons(uint8_t default_btn) {

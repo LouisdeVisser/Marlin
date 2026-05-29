@@ -434,6 +434,9 @@ namespace LanguageNarrow_en {
   LSTR MSG_MPC_AMBIENT_XFER_COEFF_E       = _UxGT("Ambient Co. *");
   LSTR MSG_MPC_AMBIENT_XFER_COEFF_FAN     = _UxGT("Fan coeff.");
   LSTR MSG_MPC_AMBIENT_XFER_COEFF_FAN_E   = _UxGT("Fan coeff. *");
+	LSTR MSG_MPC_TEMPERATURE_ERROR					= _UxGT("Temperature error");
+	LSTR MSG_MPC_AUTOTUNE_INTERRUPTED				= _UxGT("Autotune interrupted");
+	LSTR MSG_MPC_AUTOTUNE_FINISHED					= _UxGT("MPC autotune finished");
 
   LSTR MSG_SELECT_E                       = _UxGT("Select *");
   LSTR MSG_ACC                            = _UxGT("Accel");

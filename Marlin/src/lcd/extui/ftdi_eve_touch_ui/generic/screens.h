@@ -60,6 +60,9 @@ enum {
   #if HAS_TRINAMIC_CONFIG
     STEPPER_CURRENT_SCREEN_CACHE,
     STEPPER_BUMP_SENSITIVITY_SCREEN_CACHE,
+		#if ENABLED(HYBRID_THRESHOLD)
+			STEPPER_THRESHOLD_SCREEN_CACHE,
+		#endif
   #endif
   #if HAS_MULTI_HOTEND
     NOZZLE_OFFSET_SCREEN_CACHE,
@@ -158,6 +161,9 @@ enum {
 #if HAS_TRINAMIC_CONFIG
   #include "stepper_current_screen.h"
   #include "stepper_bump_sensitivity_screen.h"
+	#if ENABLED(HYBRID_THRESHOLD)
+		#include "stepper_threshold_screen.h"
+	#endif
 #endif
 
 #if HAS_MULTI_HOTEND

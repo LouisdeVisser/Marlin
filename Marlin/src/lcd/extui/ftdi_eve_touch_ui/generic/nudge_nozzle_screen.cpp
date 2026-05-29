@@ -41,7 +41,6 @@ void NudgeNozzleScreen::onEntry() {
     mydata.link_nozzles = true;
   #endif
   mydata.rel.reset();
-
   BaseNumericAdjustmentScreen::onEntry();
 }
 
@@ -57,6 +56,16 @@ void NudgeNozzleScreen::onRedraw(draw_mode_t what) {
   #endif
   w.color(z_axis).adjuster(6, GET_TEXT_F(MSG_AXIS_Z), mydata.rel.z / getAxisSteps_per_mm(Z));
   w.increments();
+	#if ENABLED(BABYSTEP_DISPLAY_TOTAL)
+		w.draw_mode(BOTH);
+		w.color(other);
+			char str[19];
+			dtostrf(getZOffset_mm(), 4, 2, str); 
+			strcat(str, " "); 
+			strcat_P(str, GET_TEXT(MSG_UNITS_MM));
+			w.text_field(8, GET_TEXT_F(MSG_BABYSTEP_TOTAL), str);
+	#endif
+
   #if HAS_MULTI_EXTRUDER
     w.toggle(8, GET_TEXT_F(MSG_ADJUST_BOTH_NOZZLES), mydata.link_nozzles);
   #endif
@@ -83,11 +92,13 @@ void NudgeNozzleScreen::onRedraw(draw_mode_t what) {
       #endif
     }
   #endif
-  if (what & FOREGROUND) {
+/*  
+	if (what & FOREGROUND) {
     cmd.colors(normal_btn)
        .font(font_medium)
        .tag(10).colors(action_btn).button(BTN_POS(1,GRID_ROWS), BTN_SIZE(GRID_COLS,1), GET_TEXT_F(MSG_BUTTON_DONE));
   }
+*/
 }
 
 bool NudgeNozzleScreen::onTouchHeld(uint8_t tag) {
@@ -107,9 +118,9 @@ bool NudgeNozzleScreen::onTouchHeld(uint8_t tag) {
     case 7: steps = mmToWholeSteps(inc, Z); smartAdjustAxis_steps( steps, Z, link); mydata.rel.z += steps; break;
     #if HAS_MULTI_EXTRUDER
       case 8: mydata.link_nozzles = !link; break;
+			case 9: FLIP(mydata.show_offsets); break;
     #endif
-    case 9: FLIP(mydata.show_offsets); break;
-    case 10: GOTO_SCREEN(SaveSettingsDialogBox); break;
+    //case 10: GOTO_SCREEN(SaveSettingsDialogBox); break;
     default: return false;
   }
   #if HAS_MULTI_EXTRUDER || HAS_BED_PROBE

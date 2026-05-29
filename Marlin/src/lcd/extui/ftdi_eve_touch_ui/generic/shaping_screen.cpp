@@ -29,16 +29,18 @@ using namespace FTDI;
 using namespace ExtUI;
 using namespace Theme;
 
+
 void ShapingScreen::onRedraw(draw_mode_t what) {
   widgets_t w(what);
   w.precision(2, DEFAULT_LOWEST);
   w.heading(            GET_TEXT_F(MSG_SHAPING_MENU));
-	w.toggle( 2,					GET_TEXT_F(MSG_ENABLE_SHAPING), 																						  getShapingState()  );
-  w.color(x_axis).units(GET_TEXT_F(MSG_UNIT_FREQ)).adjuster( 4, 		GET_TEXT_F(MSG_SHAPING_A_FREQ),   getShapingFrequency(X) );
-	w.color(y_axis).units(GET_TEXT_F(MSG_UNIT_FREQ)).adjuster( 6, 		GET_TEXT_F(MSG_SHAPING_B_FREQ),   getShapingFrequency(Y) );
-  w.color(x_axis).units(GET_TEXT_F(MSG_UNIT_ZETA)).adjuster( 8, 		GET_TEXT_F(MSG_DAMPING_A_RATIO),  getShapingZeta(X) );
-	w.color(y_axis).units(GET_TEXT_F(MSG_UNIT_ZETA)).adjuster( 10, 		GET_TEXT_F(MSG_DAMPING_B_RATIO),  getShapingZeta(Y) );
-  w.increments();
+	w.toggle( 2,					GET_TEXT_F(MSG_ENABLE_SHAPING), getShapingState(), 	ANY(HAS_ZV_SHAPING, FT_MOTION));
+	w.toggle( 4, 					GET_TEXT_F(MSG_FT_STD_SHAPING), getMotionType(), 		ENABLED(FT_MOTION));
+	w.color(x_axis).units(GET_TEXT_F(MSG_UNIT_FREQ)).adjuster( 6, 		GET_TEXT_F(MSG_SHAPING_A_FREQ),   getShapingFrequency(X));
+	w.color(y_axis).units(GET_TEXT_F(MSG_UNIT_FREQ)).adjuster( 8, 		GET_TEXT_F(MSG_SHAPING_B_FREQ),   getShapingFrequency(Y));
+	w.color(x_axis).units(GET_TEXT_F(MSG_UNIT_ZETA)).adjuster( 10, 		GET_TEXT_F(MSG_DAMPING_A_RATIO),  getShapingZeta(X));
+	w.color(y_axis).units(GET_TEXT_F(MSG_UNIT_ZETA)).adjuster( 12, 		GET_TEXT_F(MSG_DAMPING_B_RATIO),  getShapingZeta(Y));
+	w.increments();
 }
 
 
@@ -46,14 +48,15 @@ bool ShapingScreen::onTouchHeld(uint8_t tag) {
   const float increment = getIncrement();
   switch (tag) {
 		case 	2: setShapingState(!getShapingState()); break;
-    case  4: UI_DECREMENT(ShapingFrequency, X); break;
-		case	5: UI_INCREMENT(ShapingFrequency, X); break;
-    case  6: UI_DECREMENT(ShapingFrequency, Y); break;
-		case	7: UI_INCREMENT(ShapingFrequency, Y); break;
-    case  8: UI_DECREMENT(ShapingZeta, X); break;
-    case  9: UI_INCREMENT(ShapingZeta, X); break;
-		case 	10: UI_DECREMENT(ShapingZeta, Y);  break;
-		case	11: UI_INCREMENT(ShapingZeta, Y);  break;
+		case	4: setMotionType(); break;
+    case  6: UI_DECREMENT(ShapingFrequency, X); break;
+		case	7: UI_INCREMENT(ShapingFrequency, X); break;
+    case  8: UI_DECREMENT(ShapingFrequency, Y); break;
+		case	9: UI_INCREMENT(ShapingFrequency, Y); break;
+    case  10: UI_DECREMENT(ShapingZeta, X); break;
+    case  11: UI_INCREMENT(ShapingZeta, X); break;
+		case 	12: UI_DECREMENT(ShapingZeta, Y); break;
+		case	13: UI_INCREMENT(ShapingZeta, Y); break;
     default: return false;
   }
   SaveSettingsDialogBox::settingsChanged();

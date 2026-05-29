@@ -40,10 +40,11 @@ void StepperCurrentScreen::onRedraw(draw_mode_t what) {
   TERN_(Y2_IS_TRINAMIC, w.color(x_axis) .adjuster( 8, GET_TEXT_F(MSG_AXIS_Y2), getAxisCurrent_mA(Y2)) );
   TERN_(Z_IS_TRINAMIC,  w.color(z_axis) .adjuster(10, GET_TEXT_F(MSG_AXIS_Z),  getAxisCurrent_mA(Z) ) );
   TERN_(Z2_IS_TRINAMIC, w.color(z_axis) .adjuster(12, GET_TEXT_F(MSG_AXIS_Z2), getAxisCurrent_mA(Z2)) );
-  TERN_(E0_IS_TRINAMIC, w.color(e_axis) .adjuster(14, GET_TEXT_F(TERN(HAS_MULTI_EXTRUDER, MSG_AXIS_E1, MSG_AXIS_E)), getAxisCurrent_mA(E0)) );
-  TERN_(E1_IS_TRINAMIC, w.color(e_axis) .adjuster(16, GET_TEXT_F(MSG_AXIS_E2), getAxisCurrent_mA(E1)) );
-  TERN_(E2_IS_TRINAMIC, w.color(e_axis) .adjuster(18, GET_TEXT_F(MSG_AXIS_E3), getAxisCurrent_mA(E2)) );
-  TERN_(E3_IS_TRINAMIC, w.color(e_axis) .adjuster(20, GET_TEXT_F(MSG_AXIS_E4), getAxisCurrent_mA(E3)) );
+	TERN_(Z3_IS_TRINAMIC, w.color(z_axis) .adjuster(14, GET_TEXT_F(MSG_AXIS_Z3), getAxisCurrent_mA(Z3)) );
+  TERN_(E0_IS_TRINAMIC, w.color(e_axis) .adjuster(16, GET_TEXT_F(TERN(HAS_MULTI_EXTRUDER, MSG_AXIS_E1, MSG_AXIS_E)), getAxisCurrent_mA(E0)) );
+  TERN_(E1_IS_TRINAMIC, w.color(e_axis) .adjuster(18, GET_TEXT_F(MSG_AXIS_E2), getAxisCurrent_mA(E1)) );
+  TERN_(E2_IS_TRINAMIC, w.color(e_axis) .adjuster(20, GET_TEXT_F(MSG_AXIS_E3), getAxisCurrent_mA(E2)) );
+  TERN_(E3_IS_TRINAMIC, w.color(e_axis) .adjuster(22, GET_TEXT_F(MSG_AXIS_E4), getAxisCurrent_mA(E3)) );
   w.increments();
 }
 
@@ -74,21 +75,25 @@ bool StepperCurrentScreen::onTouchHeld(uint8_t tag) {
       case 12: UI_DECREMENT(AxisCurrent_mA, Z2 ); break;
       case 13: UI_INCREMENT(AxisCurrent_mA, Z2 ); break;
     #endif
+    #if Z3_IS_TRINAMIC
+      case 14: UI_DECREMENT(AxisCurrent_mA, Z3 ); break;
+      case 15: UI_INCREMENT(AxisCurrent_mA, Z3 ); break;
+    #endif
     #if E0_IS_TRINAMIC
-      case 14: UI_DECREMENT(AxisCurrent_mA, E0); break;
-      case 15: UI_INCREMENT(AxisCurrent_mA, E0); break;
+      case 16: UI_DECREMENT(AxisCurrent_mA, E0); break;
+      case 17: UI_INCREMENT(AxisCurrent_mA, E0); break;
     #endif
     #if E1_IS_TRINAMIC
-      case 16: UI_DECREMENT(AxisCurrent_mA, E1); break;
-      case 17: UI_INCREMENT(AxisCurrent_mA, E1); break;
+      case 18: UI_DECREMENT(AxisCurrent_mA, E1); break;
+      case 19: UI_INCREMENT(AxisCurrent_mA, E1); break;
     #endif
     #if E2_IS_TRINAMIC
-      case 18: UI_DECREMENT(AxisCurrent_mA, E2); break;
-      case 19: UI_INCREMENT(AxisCurrent_mA, E2); break;
+      case 20: UI_DECREMENT(AxisCurrent_mA, E2); break;
+      case 21: UI_INCREMENT(AxisCurrent_mA, E2); break;
     #endif
     #if E3_IS_TRINAMIC
-      case 20: UI_DECREMENT(AxisCurrent_mA, E3); break;
-      case 21: UI_INCREMENT(AxisCurrent_mA, E3); break;
+      case 22: UI_DECREMENT(AxisCurrent_mA, E3); break;
+      case 23: UI_INCREMENT(AxisCurrent_mA, E3); break;
     #endif
     default:
       return false;

@@ -121,6 +121,11 @@
 	#include "../../module/stepper.h"
 #endif
 
+#if ENABLED(FT_MOTION)
+	#include "../../module/ft_motion.h"
+#endif
+
+
 namespace ExtUI {
   static struct {
     bool printer_killed : 1;
@@ -480,34 +485,34 @@ namespace ExtUI {
 
     void setAxisCurrent_mA(const float mA, const axis_t axis) {
       switch (axis) {
-        case X:  TERN_(X_IS_TRINAMIC,  stepperX.rms_current(constrain(mA, 400, 1500))); break;
-        case Y:  TERN_(Y_IS_TRINAMIC,  stepperY.rms_current(constrain(mA, 400, 1500))); break;
-        case Z:  TERN_(Z_IS_TRINAMIC,  stepperZ.rms_current(constrain(mA, 400, 1500))); break;
-        case I:  TERN_(I_IS_TRINAMIC,  stepperI.rms_current(constrain(mA, 400, 1500))); break;
-        case J:  TERN_(J_IS_TRINAMIC,  stepperJ.rms_current(constrain(mA, 400, 1500))); break;
-        case K:  TERN_(K_IS_TRINAMIC,  stepperK.rms_current(constrain(mA, 400, 1500))); break;
-        case U:  TERN_(U_IS_TRINAMIC,  stepperU.rms_current(constrain(mA, 400, 1500))); break;
-        case V:  TERN_(V_IS_TRINAMIC,  stepperV.rms_current(constrain(mA, 400, 1500))); break;
-        case W:  TERN_(W_IS_TRINAMIC,  stepperW.rms_current(constrain(mA, 400, 1500))); break;
-        case X2: TERN_(X2_IS_TRINAMIC, stepperX2.rms_current(constrain(mA, 400, 1500))); break;
-        case Y2: TERN_(Y2_IS_TRINAMIC, stepperY2.rms_current(constrain(mA, 400, 1500))); break;
-        case Z2: TERN_(Z2_IS_TRINAMIC, stepperZ2.rms_current(constrain(mA, 400, 1500))); break;
-        case Z3: TERN_(Z3_IS_TRINAMIC, stepperZ3.rms_current(constrain(mA, 400, 1500))); break;
-        case Z4: TERN_(Z4_IS_TRINAMIC, stepperZ4.rms_current(constrain(mA, 400, 1500))); break;
+        case X:  TERN_(X_IS_TRINAMIC,  stepperX.rms_current(constrain(mA, 200, 1800))); break;
+        case Y:  TERN_(Y_IS_TRINAMIC,  stepperY.rms_current(constrain(mA, 200, 1800))); break;
+        case Z:  TERN_(Z_IS_TRINAMIC,  stepperZ.rms_current(constrain(mA, 200, 1800))); break;
+        case I:  TERN_(I_IS_TRINAMIC,  stepperI.rms_current(constrain(mA, 200, 1800))); break;
+        case J:  TERN_(J_IS_TRINAMIC,  stepperJ.rms_current(constrain(mA, 200, 1800))); break;
+        case K:  TERN_(K_IS_TRINAMIC,  stepperK.rms_current(constrain(mA, 200, 1800))); break;
+        case U:  TERN_(U_IS_TRINAMIC,  stepperU.rms_current(constrain(mA, 200, 1800))); break;
+        case V:  TERN_(V_IS_TRINAMIC,  stepperV.rms_current(constrain(mA, 200, 1800))); break;
+        case W:  TERN_(W_IS_TRINAMIC,  stepperW.rms_current(constrain(mA, 200, 1800))); break;
+        case X2: TERN_(X2_IS_TRINAMIC, stepperX2.rms_current(constrain(mA, 200, 1800))); break;
+        case Y2: TERN_(Y2_IS_TRINAMIC, stepperY2.rms_current(constrain(mA, 200, 1800))); break;
+        case Z2: TERN_(Z2_IS_TRINAMIC, stepperZ2.rms_current(constrain(mA, 200, 1800))); break;
+        case Z3: TERN_(Z3_IS_TRINAMIC, stepperZ3.rms_current(constrain(mA, 200, 1800))); break;
+        case Z4: TERN_(Z4_IS_TRINAMIC, stepperZ4.rms_current(constrain(mA, 200, 1800))); break;
         default: break;
       };
     }
 
     void setAxisCurrent_mA(const float mA, const extruder_t extruder) {
       switch (extruder) {
-        case E0: TERN_(E0_IS_TRINAMIC, stepperE0.rms_current(constrain(mA, 400, 1500))); break;
-        case E1: TERN_(E1_IS_TRINAMIC, stepperE1.rms_current(constrain(mA, 400, 1500))); break;
-        case E2: TERN_(E2_IS_TRINAMIC, stepperE2.rms_current(constrain(mA, 400, 1500))); break;
-        case E3: TERN_(E3_IS_TRINAMIC, stepperE3.rms_current(constrain(mA, 400, 1500))); break;
-        case E4: TERN_(E4_IS_TRINAMIC, stepperE4.rms_current(constrain(mA, 400, 1500))); break;
-        case E5: TERN_(E5_IS_TRINAMIC, stepperE5.rms_current(constrain(mA, 400, 1500))); break;
-        case E6: TERN_(E6_IS_TRINAMIC, stepperE6.rms_current(constrain(mA, 400, 1500))); break;
-        case E7: TERN_(E7_IS_TRINAMIC, stepperE7.rms_current(constrain(mA, 400, 1500))); break;
+        case E0: TERN_(E0_IS_TRINAMIC, stepperE0.rms_current(constrain(mA, 200, 1800))); break;
+        case E1: TERN_(E1_IS_TRINAMIC, stepperE1.rms_current(constrain(mA, 200, 1800))); break;
+        case E2: TERN_(E2_IS_TRINAMIC, stepperE2.rms_current(constrain(mA, 200, 1800))); break;
+        case E3: TERN_(E3_IS_TRINAMIC, stepperE3.rms_current(constrain(mA, 200, 1800))); break;
+        case E4: TERN_(E4_IS_TRINAMIC, stepperE4.rms_current(constrain(mA, 200, 1800))); break;
+        case E5: TERN_(E5_IS_TRINAMIC, stepperE5.rms_current(constrain(mA, 200, 1800))); break;
+        case E6: TERN_(E6_IS_TRINAMIC, stepperE6.rms_current(constrain(mA, 200, 1800))); break;
+        case E7: TERN_(E7_IS_TRINAMIC, stepperE7.rms_current(constrain(mA, 200, 1800))); break;
         default: break;
       };
     }
@@ -552,6 +557,70 @@ namespace ExtUI {
       }
       UNUSED(value);
     }
+
+		#if ENABLED(HYBRID_THRESHOLD)
+			int getTMCThresholdCurrent(const axis_t axis){
+				switch (axis) {
+					OPTCODE(X_IS_TRINAMIC,  case X:  return stepperX.get_pwm_thrs())
+					OPTCODE(Y_IS_TRINAMIC,  case Y:  return stepperY.get_pwm_thrs())
+					OPTCODE(Z_IS_TRINAMIC,  case Z:  return stepperZ.get_pwm_thrs())
+					OPTCODE(I_IS_TRINAMIC,  case I:  return stepperI.get_pwm_thrs())
+					OPTCODE(J_IS_TRINAMIC,  case J:  return stepperJ.get_pwm_thrs())
+					OPTCODE(K_IS_TRINAMIC,  case K:  return stepperK.get_pwm_thrs())
+					OPTCODE(U_IS_TRINAMIC,  case U:  return stepperU.get_pwm_thrs())
+					OPTCODE(V_IS_TRINAMIC,  case V:  return stepperV.get_pwm_thrs())
+					OPTCODE(W_IS_TRINAMIC,  case W:  return stepperW.get_pwm_thrs())
+					OPTCODE(X2_IS_TRINAMIC, case X2: return stepperX2.get_pwm_thrs())
+					OPTCODE(Y2_IS_TRINAMIC, case Y2: return stepperY2.get_pwm_thrs())
+					OPTCODE(Z2_IS_TRINAMIC, case Z2: return stepperZ2.get_pwm_thrs())
+					OPTCODE(Z3_IS_TRINAMIC, case Z3: return stepperZ3.get_pwm_thrs())
+					OPTCODE(Z4_IS_TRINAMIC, case Z4: return stepperZ4.get_pwm_thrs())
+					default: return 0;
+				}
+			}
+
+			int getTMCThresholdCurrent(const extruder_t extruder){
+				switch (extruder) {
+					OPTCODE(E0_IS_TRINAMIC, case E0: return stepperE0.get_pwm_thrs())
+					OPTCODE(E1_IS_TRINAMIC, case E1: return stepperE1.get_pwm_thrs())
+					OPTCODE(E2_IS_TRINAMIC, case E2: return stepperE2.get_pwm_thrs())
+					OPTCODE(E3_IS_TRINAMIC, case E3: return stepperE3.get_pwm_thrs())
+					default: return 0;
+				}
+			}
+
+			void setTMCThresholdCurrent(const int value, const axis_t axis) {
+				switch (axis) {
+					case X: TERN_(X_IS_TRINAMIC, stepperX.set_pwm_thrs(value)); break;
+					case Y: TERN_(Y_IS_TRINAMIC, stepperY.set_pwm_thrs(value)); break;
+					case Z: TERN_(Z_IS_TRINAMIC, stepperZ.set_pwm_thrs(value)); break;
+					case I: TERN_(I_IS_TRINAMIC, stepperI.set_pwm_thrs(value)); break;
+					case J: TERN_(J_IS_TRINAMIC, stepperJ.set_pwm_thrs(value)); break;
+					case K: TERN_(K_IS_TRINAMIC, stepperK.set_pwm_thrs(value)); break;
+					case U: TERN_(U_IS_TRINAMIC, stepperU.set_pwm_thrs(value)); break;
+					case V: TERN_(V_IS_TRINAMIC, stepperV.set_pwm_thrs(value)); break;
+					case W: TERN_(W_IS_TRINAMIC, stepperW.set_pwm_thrs(value)); break;
+					case X2: TERN_(X2_IS_TRINAMIC, stepperX2.set_pwm_thrs(value)); break;
+					case Y2: TERN_(Y2_IS_TRINAMIC, stepperY2.set_pwm_thrs(value)); break;
+					case Z2: TERN_(Z2_IS_TRINAMIC, stepperZ2.set_pwm_thrs(value)); break;
+					case Z3: TERN_(Z3_IS_TRINAMIC, stepperZ3.set_pwm_thrs(value)); break;
+					case Z4: TERN_(Z4_IS_TRINAMIC, stepperZ4.set_pwm_thrs(value)); break;
+					default: break;
+				}
+				UNUSED(value);
+			}
+
+			void setTMCThresholdCurrent(const int value, const extruder_t extruder) {
+				switch (extruder) {
+					case E0: TERN_(E0_IS_TRINAMIC, stepperE0.set_pwm_thrs(value)); break;
+					case E1: TERN_(E1_IS_TRINAMIC, stepperE1.set_pwm_thrs(value)); break;
+					case E2: TERN_(E2_IS_TRINAMIC, stepperE2.set_pwm_thrs(value)); break;
+					case E3: TERN_(E3_IS_TRINAMIC, stepperE3.set_pwm_thrs(value)); break;
+					default: break;
+				}
+				UNUSED(value);
+			}
+		#endif
   #endif
 
   //
@@ -677,51 +746,82 @@ namespace ExtUI {
 
 
 
-  #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z)
-    float getShapingZeta(const axis_t axis) {
-      return stepper.get_shaping_damping_ratio((AxisEnum)axis);
+  #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z, FT_MOTION)
+		static bool motiontype = false; //true == FT_motion, false == standard motion
+
+		float getShapingZeta(const axis_t axis) {
+			return motiontype ? ftMotion.cfg.zeta[(AxisEnum)axis] : stepper.get_shaping_damping_ratio((AxisEnum)axis);
     }
+
     void setShapingZeta(const float zeta, const axis_t axis) {
-      if (!WITHIN(zeta, 0, 1)) return;
-      stepper.set_shaping_damping_ratio((AxisEnum)axis, zeta);
+      if (motiontype) {
+				if(ftMotion.cfg.setZeta((AxisEnum)axis, zeta)) return;
+			} else {
+				if (!WITHIN(zeta, 0, 1)) {return;} else {stepper.set_shaping_damping_ratio((AxisEnum)axis, zeta);}
+			}
     }
     float getShapingFrequency(const axis_t axis) {
-      return stepper.get_shaping_frequency((AxisEnum)axis);
+      return motiontype ? ftMotion.cfg.baseFreq[(AxisEnum)axis] : stepper.get_shaping_frequency((AxisEnum)axis);
     }
+
     void setShapingFrequency(const float freq, const axis_t axis) {
-      constexpr float min_freq = float(uint32_t(STEPPER_TIMER_RATE) / 2) / shaping_time_t(-2);
-      if (freq == 0.0f || freq > min_freq)
-        stepper.set_shaping_frequency((AxisEnum)axis, freq);
-    }
-		bool getShapingState(){
-			const float freq = getShapingFrequency(X);
-			bool state = (freq != 0) ? true : false;
-			return state;
-		}
-		void setShapingState(const bool state){
-			if (state){
-				#if ENABLED(INPUT_SHAPING_X)
-					stepper.set_shaping_frequency((AxisEnum)X, SHAPING_FREQ_X);
-				#endif
-				#if ENABLED(INPUT_SHAPING_Y)
-					stepper.set_shaping_frequency((AxisEnum)Y, SHAPING_FREQ_Y);
-				#endif
-				#if ENABLED(INPUT_SHAPING_Z)
-					stepper.set_shaping_frequency((AxisEnum)Z, SHAPING_FREQ_Z);
-				#endif
+      if (motiontype) {
+				if (ftMotion.cfg.setBaseFreq((AxisEnum)axis, freq)) return;
 			} else {
-				#if ENABLED(INPUT_SHAPING_X)
-					stepper.set_shaping_frequency((AxisEnum)X, 0);
-				#endif
-				#if ENABLED(INPUT_SHAPING_Y)
-					stepper.set_shaping_frequency((AxisEnum)Y, 0);
-				#endif
-				#if ENABLED(INPUT_SHAPING_Z)
-					stepper.set_shaping_frequency((AxisEnum)Z, 0);
-				#endif
+				constexpr float min_freq = float(uint32_t(STEPPER_TIMER_RATE) / 2) / shaping_time_t(-2);
+				if (freq == 0.0f || freq > min_freq)
+					stepper.set_shaping_frequency((AxisEnum)axis, freq);
+			}
+    }
+
+		bool getShapingState(){
+			if (motiontype) {
+				return ftMotion.cfg.active;
+			} else {
+				const float freq = getShapingFrequency(X);
+				bool state = (freq != 0) ? true : false;
+				return state;
 			}
 		}
+
+		void setShapingState(const bool state){
+			if (motiontype){
+				ftMotion.toggle();
+			} else {
+				if (state){
+					#if ENABLED(INPUT_SHAPING_X)
+						stepper.set_shaping_frequency((AxisEnum)X, SHAPING_FREQ_X);
+					#endif
+					#if ENABLED(INPUT_SHAPING_Y)
+						stepper.set_shaping_frequency((AxisEnum)Y, SHAPING_FREQ_Y);
+					#endif
+					#if ENABLED(INPUT_SHAPING_Z)
+						stepper.set_shaping_frequency((AxisEnum)Z, SHAPING_FREQ_Z);
+					#endif
+				} else {
+					#if ENABLED(INPUT_SHAPING_X)
+						stepper.set_shaping_frequency((AxisEnum)X, 0);
+					#endif
+					#if ENABLED(INPUT_SHAPING_Y)
+						stepper.set_shaping_frequency((AxisEnum)Y, 0);
+					#endif
+					#if ENABLED(INPUT_SHAPING_Z)
+						stepper.set_shaping_frequency((AxisEnum)Z, 0);
+					#endif
+				}
+			}
+		}
+
+		bool getMotionType(){
+			return motiontype;
+		}
+
+		void setMotionType(){
+			motiontype = !motiontype;
+		}
   #endif
+
+
 
   #if HAS_JUNCTION_DEVIATION
 
