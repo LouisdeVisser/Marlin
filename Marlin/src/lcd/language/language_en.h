@@ -392,43 +392,6 @@ namespace LanguageNarrow_en {
   LSTR MSG_EXTRA_FAN_SPEED_N              = _UxGT("Extra Fan Speed ~");
   LSTR MSG_PID_AUTOTUNE                   = _UxGT("PID Autotune");
   LSTR MSG_PID_AUTOTUNE_E                 = _UxGT("Autotune * PID");
-  LSTR MSG_PID_CYCLE                      = _UxGT("PID Cycles");
-  LSTR MSG_PID_AUTOTUNE_DONE              = _UxGT("PID tuning done");
-  LSTR MSG_PID_AUTOTUNE_FAILED            = _UxGT("Autotune failed!");
-
-  LSTR MSG_PID_FOR_NOZZLE                 = _UxGT("for Nozzle is running.");
-  LSTR MSG_PID_FOR_BED                    = _UxGT("for BED is running.");
-  LSTR MSG_PID_FOR_CHAMBER                = _UxGT("for CHAMBER is running.");
-
-  LSTR MSG_TEMP_NOZZLE                    = _UxGT("Nozzle Temperature");
-  LSTR MSG_TEMP_BED                       = _UxGT("Bed Temperature");
-  LSTR MSG_TEMP_CHAMBER                   = _UxGT("Chamber Temperature");
-
-  LSTR MSG_PID_BAD_HEATER_ID              = _UxGT("Autotune failed! Bad extruder.");
-  LSTR MSG_PID_TEMP_TOO_HIGH              = _UxGT("Autotune failed! Temperature too high.");
-  LSTR MSG_PID_TIMEOUT                    = _UxGT("Autotune failed! Timeout.");
-
-  LSTR MSG_MPC_MEASURING_AMBIENT          = _UxGT("Testing heat loss");
-  LSTR MSG_MPC_HEATING_PAST_200           = _UxGT("Heating to >200C");
-  LSTR MSG_MPC_COOLING_TO_AMBIENT         = _UxGT("Cooling to ambient");
-  LSTR MSG_MPC_AUTOTUNE                   = _UxGT("MPC Autotune");
-  LSTR MSG_MPC_EDIT                       = _UxGT("Edit * MPC");
-  LSTR MSG_MPC_POWER                      = _UxGT("Heater Power");
-  LSTR MSG_MPC_POWER_E                    = _UxGT("Power *");
-  LSTR MSG_MPC_BLOCK_HEAT_CAPACITY        = _UxGT("Heat Capacity");
-  LSTR MSG_MPC_BLOCK_HEAT_CAPACITY_E      = _UxGT("Heat Cap. *");
-  LSTR MSG_SENSOR_RESPONSIVENESS          = _UxGT("Sensor Resp.");
-  LSTR MSG_SENSOR_RESPONSIVENESS_E        = _UxGT("Sensor Resp. *");
-  LSTR MSG_MPC_AMBIENT_XFER_COEFF         = _UxGT("Ambient Coeff.");
-  LSTR MSG_MPC_AMBIENT_XFER_COEFF_E       = _UxGT("Ambient Co. *");
-  LSTR MSG_MPC_AMBIENT_XFER_COEFF_FAN     = _UxGT("Fan coeff.");
-  LSTR MSG_MPC_AMBIENT_XFER_COEFF_FAN_E   = _UxGT("Fan coeff. *");
-	LSTR MSG_MPC_TEMPERATURE_ERROR					= _UxGT("Temperature error");
-	LSTR MSG_MPC_AUTOTUNE_INTERRUPTED				= _UxGT("Autotune interrupted");
-	LSTR MSG_MPC_AUTOTUNE_FINISHED					= _UxGT("MPC autotune finished");
-
-  LSTR MSG_SELECT_E                       = _UxGT("Select *");
-  LSTR MSG_ACC                            = _UxGT("Accel");
   LSTR MSG_JERK                           = _UxGT("Jerk");
   LSTR MSG_VA_JERK                        = _UxGT("Max ") STR_A _UxGT(" Jerk");
   LSTR MSG_VB_JERK                        = _UxGT("Max ") STR_B _UxGT(" Jerk");
@@ -679,6 +642,10 @@ namespace LanguageNarrow_en {
   LSTR MSG_SENSOR_RESPONSIVENESS_E        = _UxGT("Sensor Resp. *");
   LSTR MSG_MPC_AMBIENT_XFER_COEFF_E       = _UxGT("Ambient Co. *");
   LSTR MSG_MPC_AMBIENT_XFER_COEFF_FAN_E   = _UxGT("Fan coeff. *");
+	LSTR MSG_MPC_AUTOTUNE_FINISHED					= _UxGT("MPC tuning finished.");
+	LSTR MSG_MPC_TEMPERATURE_ERROR					= _UxGT("MPC tuning aborted, temperature too high.");
+	LSTR MSG_MPC_AUTOTUNE_INTERRUPTED				= _UxGT("MPC tuning interrupted.");
+	LSTR MPC_DONE														= _UxGT("MPC tuning done.");
   LSTR MSG_XY_FREQUENCY_LIMIT             = _UxGT("XY Freq Limit");
   LSTR MSG_XY_FREQUENCY_FEEDRATE          = _UxGT("Min FR Factor");
   LSTR MSG_VOLUMETRIC_LIMIT               = _UxGT("E Limit in mm") SUPERSCRIPT_THREE;

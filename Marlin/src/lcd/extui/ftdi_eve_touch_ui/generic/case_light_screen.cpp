@@ -62,7 +62,7 @@ bool CaseLightScreen::onTouchHeld(uint8_t tag) {
       return false;
   }
 
-  SaveSettingsDialogBox::settingsChanged();
+  //SaveSettingsDialogBox::settingsChanged();
   return true;
 }
 

@@ -116,7 +116,7 @@ static enum {
   WAIT_FOR_DEVICE,
   WAIT_FOR_LUN,
   MEDIA_READY,
-  MEDIA_ERROR
+  MEDIA_ERROR,
 } state;
 
 #if USB_DEBUG >= 3

@@ -1245,15 +1245,15 @@
    * Jolt is the rate of change of acceleration, not related to Marlin's "classic jerk."
    * Ramps acceleration gradually so max acceleration is limited by max speed and distance traveled.
    */
-  //#define FTM_CONSTANT_JOLT
+  #define FTM_CONSTANT_JOLT
   #if ENABLED(FTM_CONSTANT_JOLT)
-    #define FTM_DEFAULT_JOLT 250.0f         // (m/s³) Default jolt for constant-jolt trajectory.
+    #define FTM_DEFAULT_JOLT 2000.0f         // (m/s³) Default jolt for constant-jolt trajectory.
                                             // Higher values print faster at the cost of increased resonance and extruder stress
   #endif
 
   // Block acceleration profile
   // :[ 'TRAPEZOIDAL', 'POLY5', 'POLY6', 'CONSTANT_JOLT' ]
-  #define FTM_TRAJECTORY_TYPE TRAPEZOIDAL   //   TRAPEZOIDAL: Continuous Velocity. Max acceleration is respected.
+  #define FTM_TRAJECTORY_TYPE CONSTANT_JOLT   //   TRAPEZOIDAL: Continuous Velocity. Max acceleration is respected.
                                             //         POLY5: Like POLY6 with 1.5x but uses less CPU. Requires FTM_POLYS.
                                             //         POLY6: Continuous Acceleration (aka S_CURVE). Requires FTM_POLYS.
                                             // CONSTANT_JOLT: 7-phase S-curve. Requires FTM_CONSTANT_JOLT.
@@ -1263,16 +1263,16 @@
   /**
    * Advanced configuration
    */
-  #define FTM_BUFFER_SIZE             128   // Window size for trajectory generation, must be a power of 2 (e.g 64, 128, 256, ...)
+  #define FTM_BUFFER_SIZE             512   // Window size for trajectory generation, must be a power of 2 (e.g 64, 128, 256, ...)
                                             // The total buffered time in seconds is (FTM_BUFFER_SIZE/FTM_FS)
-  #define FTM_FS                     1000   // (Hz) Frequency for trajectory generation.
-  #define FTM_MIN_SHAPE_FREQ           20   // (Hz) Minimum shaping frequency, lower consumes more RAM
+  #define FTM_FS                     2048   // (Hz) Frequency for trajectory generation.
+  #define FTM_MIN_SHAPE_FREQ           30   // (Hz) Minimum shaping frequency, lower consumes more RAM
 
   /**
    * TMC2208 / TMC2208_STANDALONE drivers require a brief pause after a DIR change
    * to prevent a standstill shutdown when using StealthChop (the standalone default).
    * These options cause FT Motion to delay for > 750µs after a DIR change on a given axis.
-   * Disable only if you are certain that this can never happen with your TMC2208s.
+   * Disable only if you are certain that this can never happen with your TMC2208s.g
    */
   #if AXIS_DRIVER_TYPE_X(TMC2208) || AXIS_DRIVER_TYPE_X(TMC2208_STANDALONE)
     #define FTM_DIR_CHANGE_HOLD_X
@@ -1322,7 +1322,7 @@
   #endif
   //#define SHAPING_MIN_FREQ  20.0      // (Hz) By default the minimum of the shaping frequencies. Override to affect SRAM usage.
   //#define SHAPING_MAX_STEPRATE 10000  // By default the maximum total step rate of the shaped axes. Override to affect SRAM usage.
-  //#define SHAPING_MENU                // Add a menu to the LCD to set shaping parameters.
+  #define SHAPING_MENU                // Add a menu to the LCD to set shaping parameters.
 #endif
 
 #if ANY(INPUT_SHAPING_X, INPUT_SHAPING_Y, INPUT_SHAPING_Z, FTM_SHAPER_ZV, FTM_SHAPER_ZVD, FTM_SHAPER_ZVDD, FTM_SHAPER_ZVDDD, FTM_SHAPER_EI, FTM_SHAPER_2HEI, FTM_SHAPER_3HEI, FTM_SHAPER_MZV)
@@ -1839,7 +1839,7 @@
    * Reinit the LCD after SD Card insert/remove or when entering the menu.
    * Required for some LCDs that use shared SPI with an external SD Card reader.
    */
-  #define REINIT_NOISY_LCD
+  //#define REINIT_NOISY_LCD
 
   // The standard SD detect circuit reads LOW when media is inserted and HIGH when empty.
   // Enable this option and set to HIGH if your SD cards are incorrectly detected.
@@ -2021,7 +2021,7 @@
     //#define USE_UHS2_USB
     //#define USE_UHS3_USB
 
-    #define DISABLE_DUE_SD_MMC // Disable USB Host access to USB Drive to prevent hangs on block access for DUE platform
+    //#define DISABLE_DUE_SD_MMC // Disable USB Host access to USB Drive to prevent hangs on block access for DUE platform
 
     /**
      * Native USB Host supported by some boards (USB OTG)
@@ -2477,13 +2477,13 @@
  *
  * See https://marlinfw.org/docs/features/lin_advance.html for full instructions.
  */
-//#define LIN_ADVANCE
+#define LIN_ADVANCE
 
 #if ANY(LIN_ADVANCE, FT_MOTION)
   #if ENABLED(DISTINCT_E_FACTORS)
     #define ADVANCE_K { 0.22 }    // (mm) Compression length per 1mm/s extruder speed, per extruder. Override with 'M900 T<tool> K<mm>'.
   #else
-    #define ADVANCE_K 0.22        // (mm) Compression length for all extruders. Override with 'M900 K<mm>'.
+    #define ADVANCE_K 0.052        // (mm) Compression length for all extruders. Override with 'M900 K<mm>'.
   #endif
   //#define ADVANCE_K_EXTRA       // Add a second linear advance constant, configurable with 'M900 L'.
 #endif
