@@ -83,11 +83,7 @@ void GcodeSuite::M420() {
       }
       TERN_(AUTO_BED_LEVELING_BILINEAR, bedlevel.refresh_bed_level());
       SERIAL_ECHOPGM("Simulated " STRINGIFY(GRID_MAX_POINTS_X) "x" STRINGIFY(GRID_MAX_POINTS_Y) " mesh ");
-      SERIAL_ECHOPGM(" (", x_min);
-      SERIAL_CHAR(','); SERIAL_ECHO(y_min);
-      SERIAL_ECHOPGM(")-(", x_max);
-      SERIAL_CHAR(','); SERIAL_ECHO(y_max);
-      SERIAL_ECHOLNPGM(")");
+      SERIAL_ECHOLN(F(" ("), x_min, C(','), y_min, F(")-("), x_max, C(','), y_max, C(')'));
     }
   #endif
 
@@ -204,7 +200,7 @@ void GcodeSuite::M420() {
   // V to print the matrix or mesh
   if (seenV) {
     #if ABL_PLANAR
-      planner.bed_level_matrix.debug(F("Bed Level Correction Matrix:"));
+      planner.bed_level_matrix.debug(F("Bed Level Correction Matrix:"), 4);
     #else
       if (leveling_is_valid()) {
         #if ENABLED(AUTO_BED_LEVELING_BILINEAR)
